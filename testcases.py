@@ -10,15 +10,17 @@ def check1(problem1):
         check_patterns(pattern.split('|'), string, remainder)
 
     def check_patterns(patterns, string, remainder):
+        test_case = ("Patterns: %r Input: %r Expected remainder: %r"
+                     % (patterns, string, remainder))
         stream = iter(string)
         result = problem1(patterns, stream)
+        unconsumed = ''.join(stream)
         if remainder is None:
-            assert result is None
-            for ch in stream:
-                assert False, "Stream should be exhausted"
+            assert result is None, test_case
+            assert not unconsumed, "Stream should be exhausted. " + test_case
         else:
-            assert result is not None
-            assert remainder == ''.join(stream)
+            assert result is not None, test_case
+            assert unconsumed == remainder, test_case
 
     check_patterns([], '', None)
     check_patterns([], 'wheee', None)
