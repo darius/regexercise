@@ -24,12 +24,12 @@ expressions however you like; define three constructors:
 * `literal(character)` should represent a regex matching just that character.
 * `either(regex1, regex2)` should match what either regex1 or
 regex2 matches; i.e. it represents `regex1|regex2`.
-* `compose(regex1, regex2)` matches a match of `regex1` followed
+* `chain(regex1, regex2)` matches a match of `regex1` followed
 by a match of `regex2`; i.e. it represents `regex1 regex2`.
 
 So you could encode the same pattern as before as
 
-    >>> def sequence(regexes): return reduce(compose, regexes)
+    >>> def sequence(regexes): return reduce(chain, regexes)
     >>> rat_or_cat = either(sequence(map(literal, 'rat')), sequence(map(literal, 'cat')))
 
 and then `search2(rat_or_cat, stream)` should produce the same
