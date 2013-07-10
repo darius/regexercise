@@ -17,6 +17,12 @@ don't have to report which one.) For example, in Python we might ask
     >>> ''.join(stream)  # The rest wasn't consumed, see:
     ' is fat'
 
+Test your solution by defining it in a module, say problem1.py. Then
+
+    >>> import tests, problem1
+    >>> tests.check1(problem1)
+    'Problem 1: all tests passed.'
+
 **Second:** As before, but instead of a list of strings, we take a
 restricted kind of regular expression. You can represent these
 expressions however you like; define three constructors:

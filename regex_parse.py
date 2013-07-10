@@ -19,7 +19,7 @@ def make_parser(maker):
     else:
         def oneof(chars):  return reduce(either, map(literal, chars))
 
-    return Parser(r"""
+    parser = Parser(r"""
 regex   = exp $
 
 exp     = term [|] exp    either
@@ -47,6 +47,11 @@ char    = \\(.)
 """,
                   join=join,
                   **locals())
+    return lambda s: parser(s)[0]
+
+class Struct(object):
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
 
 
 # Test
