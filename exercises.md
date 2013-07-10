@@ -1,4 +1,4 @@
-Some coding exercises, working up to matching regular expressions with Thompson's algorithm.
+## Some coding exercises, working up to matching regular expressions with Thompson's algorithm.
 
 I'm assuming you know what a regular expression is and you're a fairly
 experienced programmer. I don't know if these exercises are either fun or
@@ -12,8 +12,8 @@ stream and report as soon as one of the strings occurs in it. (You
 don't have to report which one.) For example, in Python we might ask
 
     >>> stream = iter('a cat is fat')
-    >>> search(['rat', 'cat'], stream)  # Return position after first match, or None
-    5
+    >>> search(['rat', 'cat'], stream)  # Is 'rat' or 'cat' in the stream?
+    True
     >>> ''.join(stream)  # The rest wasn't consumed, see:
     ' is fat'
 

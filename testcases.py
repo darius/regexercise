@@ -16,10 +16,10 @@ def check1(problem1):
         test_case = ("Patterns: %r Input: %r Expected remainder: %r Actual remainder: %r"
                      % (patterns, string, remainder, unconsumed))
         if remainder is None:
-            assert result is None, test_case
+            assert result is False, test_case
             assert not unconsumed, "Stream should be exhausted. " + test_case
         else:
-            assert result is not None, test_case
+            assert result is True, test_case
             assert unconsumed == remainder, test_case
 
     check_patterns([], '', None)
