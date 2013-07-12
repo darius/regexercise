@@ -57,3 +57,11 @@ def check2(module):
           'hello 0110001100011000110 how are you?',
           None)
     return "Problem 2: all tests passed."
+
+def check3(module):
+    check2(module)
+    check(module, r'A+', 'Rating AAA+, would do again.', 'AA+, would do again.')
+    check(module, r'a[bc]+d', 'my abdomen', 'omen')
+    check(module, r'a[bc]+d', 'abcbdcb', 'cb')
+    check(module, r'a[bc]+d', 'my addomen', None)
+    return "Problem 3: all tests passed."
