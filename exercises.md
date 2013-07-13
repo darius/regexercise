@@ -84,17 +84,23 @@ both of its arguments match.
 
 ## General hints
 
-For all these problems you can keep a set of states of some kind; in the main loop you
-ask if any of the states is the matched state, and if not, get the next character from
-the stream and update the state-set according to it. For the first problem [here's
-pseudocode](http://stackoverflow.com/a/846728/27024) (in the first part of the answer;
-it assumes there's just one pattern string, but generalizes easily).
+For all these problems you can keep a set of states of some kind; in
+the main loop you ask if any of the states is the matched state, and
+if not, get the next character from the stream and update the
+state-set according to it. For the first problem [here's
+pseudocode](http://stackoverflow.com/a/846728/27024) (in the first
+part of the answer; it assumes there's just one pattern string, but
+generalizes easily).
 
-What kind of states will work for the subsequent problems? Essentially, regular 
-expressions again: if a state represents a regular expression r, and you get input
-character c, then the [Brzozowski derivative](http://blog.sigfpe.com/2005/05/derivatives-of-regular-expressions.html)
-dr/dc is the next state. Thompson represents dr/dc as a set of 0 or more possible
-next states. If r is `ax|ay` and c is `a`, then you could get either one next state,
-`x|y`, or two next states, `x` and `y`, depending on how you write your code.
+What kind of states will work for the subsequent problems?
+Essentially, regular expressions again: if a state represents a
+regular expression r, and you get input character c, then the
+[Brzozowski
+derivative](http://blog.sigfpe.com/2005/05/derivatives-of-regular-expressions.html)
+dr/dc is the next state. Thompson represents dr/dc as a set of 0 or
+more possible next states. If r is `ax|ay` and c is `a`, then you
+could get either one next state, `x|y`, or two next states, `x` and
+`y`, depending on how you write your code.
 
-Here's the original paper ["Regular Expression Search Algorithm"](http://www.fing.edu.uy/inco/cursos/intropln/material/p419-thompson.pdf).
+Here's the original paper ["Regular Expression Search
+Algorithm"](http://www.fing.edu.uy/inco/cursos/intropln/material/p419-thompson.pdf).
