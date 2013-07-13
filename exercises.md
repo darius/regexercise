@@ -7,9 +7,10 @@ improve them.
 
 ## The problems
 
-**First**, given a list of strings, and a stream of characters, read the
-stream and report as soon as one of the strings occurs in it. (You
-don't have to report which one.) For example, in Python we might ask
+**Literal patterns**: Given a list of strings, and a stream of
+characters, read the stream and report as soon as one of the strings
+occurs in it. (You don't have to report which one.) For example, in
+Python we might ask
 
     >>> stream = iter('a cat is fat')
     >>> search(['rat', 'cat'], stream)  # Is 'rat' or 'cat' in the stream?
@@ -17,14 +18,14 @@ don't have to report which one.) For example, in Python we might ask
     >>> ''.join(stream)  # The rest wasn't consumed, see:
     ' is fat'
 
-Test your solution by defining it in a module, say problem1.py. Then
+Test your solution by defining it in a module, say literals.py. Then
 
-    >>> import tests, problem1
-    >>> tests.check1(problem1)
-    'Problem 1: all tests passed.'
+    >>> import tests, literals
+    >>> tests.check_literals(literals)
+    'Literal patterns: all tests passed.'
 
-**Second:** As before, but instead of a list of strings, we take a
-restricted kind of regular expression. You can represent these
+**Abstract data**: As before, but instead of a list of strings, we
+take a restricted kind of regular expression. You can represent these
 expressions however you like; define three constructors:
 
 * `literal(character)` should represent a regex matching just that character.
@@ -51,26 +52,35 @@ strings. (Also, we're soon going to add in a repetition operator
 that'd make the set of matching strings infinite.) So now you want to
 work with a more tailored representation.
 
-**Third:** Now with one more regex constructor:
+**Repetition**: Now with one more regex constructor:
 
 * `plus(regex)` has matches consisting of 1 or more matches of `regex` in sequence.
 (The Kleene plus: `(regex)+` in the usual notation.)
 
-**Fourth:** Replace the `plus` constructor with `star`, matching 0 or more.
-Getting the matching to terminate can be tricky for patterns like `star(star(regex))` and you 
-might prefer to just declare you won't handle such cases.
+The following two problems could be tackled in either order.
 
-**Fifth:** Don't allocate any memory inside the main matching loop. (Some 
-languages would make satisfying the letter of this requirement more painful than
-it's worth; so it's enough if there's an obvious translation into an allocation-free
-loop in a lower-level language.)
+**Matching nothing**: Replace the `plus` constructor with `star`,
+matching 0 or more. Getting the matching to terminate can be tricky
+for patterns like `star(star(regex))` and you might prefer to just
+declare you won't handle such cases.
 
-**Sixth:** Compile the regex, before the start of matching, into a machine-code program to
-run at match time. I'll define a simple machine language for this, since the IBM 7094 that
-Thompson used was kind of tricky and obscure. (To be written.)
+**Compiling**: Don't allocate any memory inside the main matching
+loop. (Some languages would make satisfying the letter of this
+requirement more painful than it's worth; so it's enough if there's an
+obvious translation into an allocation-free loop in a lower-level
+language.)
 
-**Bonus:** Add a `both(regex1, regex2)` constructor that matches when both of its
-arguments match.
+**Machine code for literal patterns**: Take literal patterns, as in
+the first problem, but before the start of matching compile them into
+a machine-code program that'll do the matching. I'll define a simple
+machine language for this, since the IBM 7094 that Thompson used was
+kind of tricky and obscure. (To be written.)
+
+**Machine code**: As above, but for regular expressions. You might
+jump straight to this problem if you're confident and impatient.
+
+**Bonus:** Add a `both(regex1, regex2)` constructor that matches when
+both of its arguments match.
 
 ## General hints
 

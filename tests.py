@@ -22,14 +22,14 @@ def check(module, regex_string, string, remainder):
     parse = make_parser(module)
     check_search(module.search, parse(regex_string), string, remainder)
 
-def check1(module):
+def check_literals(module):
     check_search(module.search, [], '', None)
     check_search(module.search, [], 'wheee', None)
     check_search(module.search, [''], 'wheee', 'wheee')
-    check1_base(Problem1RegexMaker(module.search))
-    return "Problem 1: all tests passed."
+    check1_base(LiteralsRegexMaker(module.search))
+    return "Literal patterns: all tests passed."
 
-class Problem1RegexMaker:
+class LiteralsRegexMaker:
     def __init__(self, search):
         self.search = search
     empty = ['']
@@ -48,7 +48,7 @@ def check1_base(module):
     check(module, r'XXX', 'XX', None)
     check(module, r'XXXY', 'r u XXXish or XXXY?', '?')
 
-def check2(module):
+def check_abstract_data(module):
     check1_base(module)
     check(module, r'(0|1)'*20,
           'hello 01100011000110001100 how are you?',
@@ -56,13 +56,13 @@ def check2(module):
     check(module, r'(0|1)'*20,
           'hello 0110001100011000110 how are you?',
           None)
-    return "Problem 2: all tests passed."
+    return "Abstract data: all tests passed."
 
-def check3(module):
-    check2(module)
+def check_repetition(module):
+    check_abstract_data(module)
     check(module, r'A+', 'Rating AAA+, would do again.', 'AA+, would do again.')
     check(module, r'a[bc]+d', 'my abdomen', 'omen')
     check(module, r'a[bc]+d', 'abcbdcb', 'cb')
     check(module, r'a[bc]+d', 'my addomen', None)
     check(module, r'(cat|dog)+like', 'dogcatcatdogcatdogdogcatdogcatcatdogcatdogdogcatlikely', 'ly')
-    return "Problem 3: all tests passed."
+    return "Repetition: all tests passed."
