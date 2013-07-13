@@ -56,6 +56,12 @@ def check_abstract_data(module):
     check(module, r'(0|1)'*20,
           'hello 0110001100011000110 how are you?',
           None)
+    check(module, r'(aa|a)'*40,
+          'a aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa b',
+          'aaaaa b')
+    check(module, r'(aa|a)'*40,
+          'a aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa b',
+          None)
     return "Abstract data: all tests passed."
 
 def check_repetition(module):
