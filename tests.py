@@ -64,4 +64,5 @@ def check3(module):
     check(module, r'a[bc]+d', 'my abdomen', 'omen')
     check(module, r'a[bc]+d', 'abcbdcb', 'cb')
     check(module, r'a[bc]+d', 'my addomen', None)
+    check(module, r'(cat|dog)+like', 'dogcatcatdogcatdogdogcatdogcatcatdogcatdogdogcatlikely', 'ly')
     return "Problem 3: all tests passed."
