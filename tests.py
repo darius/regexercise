@@ -1,6 +1,5 @@
 """
 Tests for the exercises.
-Call check1(module_for_problem_1), check2(module_for_problem_2), ...
 """
 
 from regex_parse import make_parser
@@ -44,6 +43,7 @@ def check1_base(module):
     check(module, r'X', 'yX', '')
     check(module, r'X|X', 'yX', '')
     check(module, r'X|YY', 'YX', '')
+    check(module, r'hallo|a', 'hallo', 'llo')
     check(module, r'ab', 'aab', '')
     check(module, r'rat|cat', 'a cat is fat', ' is fat')
     check(module, r'XXX', 'XX', None)
