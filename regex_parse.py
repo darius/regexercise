@@ -2,6 +2,7 @@
 Derived from https://github.com/darius/peglet/blob/master/examples/regex.py
 """
 
+from functools import reduce
 from peglet import Parser, join
 
 def make_parser(maker):
@@ -73,4 +74,4 @@ if globals().get('halp'):
     parse = make_parser(Mk())
 
 ## parse('(Chloe|Yvette), a( precocious)? (toddler|writer)')
-#. (['Chloe, a precocious toddler', 'Chloe, a precocious writer', 'Chloe, a toddler', 'Chloe, a writer', 'Yvette, a precocious toddler', 'Yvette, a precocious writer', 'Yvette, a toddler', 'Yvette, a writer'],)
+#. ['Chloe, a precocious toddler', 'Chloe, a precocious writer', 'Chloe, a toddler', 'Chloe, a writer', 'Yvette, a precocious toddler', 'Yvette, a precocious writer', 'Yvette, a toddler', 'Yvette, a writer']
