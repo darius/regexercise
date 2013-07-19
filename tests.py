@@ -44,6 +44,7 @@ def check1_base(module):
     check(module, r'X', 'yX', '')
     check(module, r'X|X', 'yX', '')
     check(module, r'X|YY', 'YX', '')
+    check(module, r'ab', 'aab', '')
     check(module, r'rat|cat', 'a cat is fat', ' is fat')
     check(module, r'XXX', 'XX', None)
     check(module, r'XXXY', 'r u XXXish or XXXY?', '?')
