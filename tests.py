@@ -8,14 +8,17 @@ def check_search(search, pattern, string, remainder):
     stream = iter(string)
     result = search(pattern, stream)
     unconsumed = ''.join(stream)
-    test_case = ("Pattern: %r Input: %r Expected remainder: %r Actual remainder: %r"
-                 % (pattern, string, remainder, unconsumed))
+    test_case = ''.join('\n %s %r' % pair
+                        for pair in (("Pattern: ", pattern),
+                                     ("Input:", string),
+                                     ("Remainder should be:", remainder),
+                                     ("But remainder is:   ", unconsumed)))
     if remainder is None:
-        assert result is False, test_case
-        assert not unconsumed, "Stream should be exhausted. " + test_case
+        assert result is False, "The result should be False." + test_case
+        assert not unconsumed, "The stream should be exhausted." + test_case
     else:
-        assert result is True, test_case
-        assert unconsumed == remainder, test_case
+        assert result is True, "The result should be True." + test_case
+        assert unconsumed == remainder, "Too much or too litle of the stream was consumed." + test_case
 
 def check(module, regex_string, string, remainder):
     parse = make_parser(module)
