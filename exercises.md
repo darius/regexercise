@@ -18,7 +18,17 @@ Python we might ask
     >>> ''.join(stream)  # The rest wasn't consumed, see:
     ' is fat'
 
-Test your solution by defining it in a module, say literals.py. Then
+Test your solution by defining it in a module `literals.py`. Then
+
+    $ python tests.py
+
+will check it. (If it works, you'll still get a failure message when `tests.py`
+goes on to test the *rest* of the problems. You can run just the literals tests
+via
+
+    $ python tests.py literals
+
+or
 
     >>> import tests, literals
     >>> tests.check_literals(literals)
@@ -51,6 +61,8 @@ exponentially bigger than the regular expression -- consider
 strings. (Also, we're soon going to add in a repetition operator
 that'd make the set of matching strings infinite.) So now you want to
 work with a more tailored representation.
+
+Put your code in `abstract_data.py` so `tests.py` knows where to find it.
 
 **Repetition**: Now with one more regex constructor:
 
