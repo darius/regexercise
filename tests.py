@@ -1,18 +1,25 @@
 """
-Tests for the exercises.
+Tests for the problems.
 """
 
 from regex_parse import make_parser
 
 def main(argv):
-    problems = 'literals abstract_data repetition zero_or_more'.split()
-    if 1 < len(argv):
-        problems = argv[1:]
+    problems = argv[1:] or 'literals abstract_data repetition zero_or_more'.split()
     for problem in problems:
-        print('Testing ' + problem + '.py: ')
-        globals()['check_'+problem](__import__(problem))
-        print('ok.')
+        test_problem(problem)
     return 0
+
+def test_problem(name):
+    module = __import__(name)
+    check = globals()['check_'+name]
+    print("Testing " + name + ".py: ")
+    try:
+        check(module)
+    except NotImplementedError:
+        print("  Nothing to test yet.")
+    else:
+        print("  Passed.")
 
 def check_search(search, pattern, string, remainder):
     correct_result = remainder is not None
