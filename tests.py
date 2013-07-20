@@ -76,3 +76,13 @@ def check_repetition(module):
     check(module, r'a[bc]+d', 'my addomen', None)
     check(module, r'(cat|dog)+like', 'dogcatcatdogcatdogdogcatdogcatcatdogcatdogdogcatlikely', 'ly')
     return "Repetition: all tests passed."
+
+def check_zero_or_more(module):
+    check_repetition(module)
+    check(module, r'a*', '', '')
+    check(module, r'ab*c', 'an abba abcd', 'd')
+    check(module, r'ab*c', 'an abba abd', None)
+    check(module, r'yo(ab|c*a)*ba', 'a yoaabcaccaabbaba', 'ba')
+    check(module, r'a(b*)*d', 'an ad attacks', ' attacks')
+    check(module, r'a(b*)*d', 'an abdomen', 'omen')
+    return "Zero or more: all tests passed."
