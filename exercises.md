@@ -18,7 +18,7 @@ Python we might ask
     >>> ''.join(stream)  # The rest wasn't consumed, see:
     ' is fat'
 
-Test your solution by defining it in a module `literals.py`. Then
+Test your solution by defining it in a module [literals.py](literals.py). Then
 
     $ python tests.py
 
