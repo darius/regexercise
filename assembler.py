@@ -47,7 +47,7 @@ def starts_comment(string):
 
 def tokenize(line):
     tokens = line.split()
-    if line[:1].isspace() or starts_comment(line):
+    if not line or line[:1].isspace() or starts_comment(line):
         label = ''
     else:
         label = tokens.pop(0)
