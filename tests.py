@@ -5,7 +5,8 @@ Tests for the problems.
 from regex_parse import make_parser
 
 def main(argv):
-    problems = argv[1:] or 'literals finite plus star'.split()
+    problems = (argv[1:]
+                or 'literals finite plus star plus_compiled star_compiled'.split())
     for problem in problems:
         test_problem(problem)
     return 0
@@ -98,6 +99,9 @@ def check_plus(module):
     check(module, r'(cat|dog)+like', 'dogcatcatdogcatdogdogcatdogcatcatdogcatdogdogcatlikely', 'ly')
     return "Plus: all tests passed."
 
+def check_plus_compiled(module):
+    return check_plus(module)
+
 def check_star(module):
     check_plus(module)
     check(module, r'a*', '', '')
@@ -107,6 +111,9 @@ def check_star(module):
     check(module, r'a(b*)*d', 'an ad attacks', ' attacks')
     check(module, r'a(b*)*d', 'an abdomen', 'omen')
     return "Star: all tests passed."
+
+def check_star_compiled(module):
+    return check_star(module)
 
 if __name__ == '__main__':
     import sys

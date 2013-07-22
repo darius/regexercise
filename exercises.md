@@ -76,11 +76,12 @@ The following two problems could be tackled in either order.
 matching to terminate may be tricky for patterns like
 `star(star(regex))`.
 
-**Compiling**: Don't allocate any memory inside the main matching
-loop. (Some languages would make satisfying the letter of this
-requirement more painful than it's worth; so it's enough if there's an
-obvious translation into an allocation-free loop in a lower-level
-language.)
+**Compiling**: In [plus_compiled.py](plus_compiled.py) or
+[star_compiled.py](star_compiled.py): Don't allocate any memory inside
+the main matching loop. (Some languages would make satisfying the
+letter of this requirement more painful than it's worth; so it's
+enough if there's an obvious translation into an allocation-free loop
+in a lower-level language.)
 
 **Machine code for literal patterns**: Take literal patterns, as in
 the first problem, but before the start of matching compile them into
