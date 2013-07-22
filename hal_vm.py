@@ -6,7 +6,7 @@ fixed-length strings with fields holding instruction mnemonics and
 decimal numbers.
 """
 
-from assembler import assemble
+import assembler
 import re
 
 ## v = load('catfind.s', '')
@@ -41,14 +41,12 @@ def toplevel(filename, inputs=''):
     vm.show()
 
 def load(filename, inputs):
-    env = dict(('r%d'%i, i) for i in range(1, 10))
-    words = assemble(assemble1, open(filename), env)
-    return VM(words, inputs, env)
+    return load_program(open(filename), inputs)
 
-def show_env(env):
-    return ['%2d %-12s' % (value, label)
-            for label, value in sorted(env.items(), key=lambda kv: kv[1])
-            if not re.match(r'r[1-9]|__here__', label)]
+def load_program(program_lines, inputs):
+    env = dict(('r%d'%i, i) for i in range(1, 10))
+    words = assembler.assemble(assemble1, program_lines, env)
+    return VM(words, inputs, env)
 
 def assemble1(tokens, env):
     mnemonic, rest = tokens[0].lower(), ' '.join(tokens[1:])
@@ -62,6 +60,11 @@ def assemble1(tokens, env):
             args.append('0')
         assert len(args) == 3
         return ['%-5s%s%s%02s' % (mnemonic, args[0], args[1], int(args[2]))]
+
+def show_env(env):
+    return ['%2d %-12s' % (value, label)
+            for label, value in sorted(env.items(), key=lambda kv: kv[1])
+            if not re.match(r'r[1-9]|__here__', label)]
 
 def put_number(vh, vn):
     assert len(vh) == 7
