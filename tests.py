@@ -5,7 +5,7 @@ Tests for the problems.
 from regex_parse import make_parser
 
 def main(argv):
-    problems = argv[1:] or 'literals abstract_data repetition zero_or_more'.split()
+    problems = argv[1:] or 'literals finite plus star'.split()
     for problem in problems:
         test_problem(problem)
     return 0
@@ -73,7 +73,7 @@ def check1_base(module):
     check(module, r'XXX', 'XX', None)
     check(module, r'XXXY', 'r u XXXish or XXXY?', '?')
 
-def check_abstract_data(module):
+def check_finite(module):
     check1_base(module)
     check(module, r'(0|1)'*20,
           'hello 01100011000110001100 how are you?',
@@ -89,24 +89,24 @@ def check_abstract_data(module):
           None)
     return "Abstract data: all tests passed."
 
-def check_repetition(module):
-    check_abstract_data(module)
+def check_plus(module):
+    check_finite(module)
     check(module, r'A+', 'Rating AAA+, would do again.', 'AA+, would do again.')
     check(module, r'a[bc]+d', 'my abdomen', 'omen')
     check(module, r'a[bc]+d', 'abcbdcb', 'cb')
     check(module, r'a[bc]+d', 'my addomen', None)
     check(module, r'(cat|dog)+like', 'dogcatcatdogcatdogdogcatdogcatcatdogcatdogdogcatlikely', 'ly')
-    return "Repetition: all tests passed."
+    return "Plus: all tests passed."
 
-def check_zero_or_more(module):
-    check_repetition(module)
+def check_star(module):
+    check_plus(module)
     check(module, r'a*', '', '')
     check(module, r'ab*c', 'an abba abcd', 'd')
     check(module, r'ab*c', 'an abba abd', None)
     check(module, r'yo(ab|c*a)*ba', 'a yoaabcaccaabbaba', 'ba')
     check(module, r'a(b*)*d', 'an ad attacks', ' attacks')
     check(module, r'a(b*)*d', 'an abdomen', 'omen')
-    return "Zero or more: all tests passed."
+    return "Star: all tests passed."
 
 if __name__ == '__main__':
     import sys

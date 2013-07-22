@@ -60,10 +60,10 @@ strings. (Also, we're soon going to add in a repetition operator
 that'd make the set of matching strings infinite.) So now you want to
 work with a more tailored representation.
 
-Put your code in [abstract_data.py](abstract_data.py) so [tests.py](tests.py)
+Put your code in [finite.py](finite.py) so [tests.py](tests.py)
 knows where to find it.
 
-**Repetition**: Now in [repetition.py](repetition.py) with one more
+**Repetition**: Now in [plus.py](plus.py) with one more
 regex constructor:
 
 * `plus(regex)` has matches consisting of 1 or more matches of `regex`
@@ -71,7 +71,7 @@ in sequence. (The Kleene plus: `(regex)+` in the usual notation.)
 
 The following two problems could be tackled in either order.
 
-**Matching nothing**: In [zero_or_more.py](zero_or_more.py) add the
+**Matching nothing**: In [star.py](star.py) add the
 `star` constructor, like `plus` but matching 0 or more. Getting the
 matching to terminate may be tricky for patterns like
 `star(star(regex))`.
