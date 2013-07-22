@@ -47,7 +47,7 @@ def load(filename, inputs):
 
 def show_env(env):
     return ['%2d %-12s' % (value, label)
-            for label, value in sorted(env.items(), key=lambda (k,v): v)
+            for label, value in sorted(env.items(), key=lambda kv: kv[1])
             if not re.match(r'r[1-9]|__here__', label)]
 
 def assemble1(tokens, env):
@@ -100,11 +100,11 @@ class VM(object):
 
     def show(self):
         regs = map(self.show_reg, range(10))
-        print '\n'.join(format_columns(regs, 5))
-        print
+        print('\n'.join(format_columns(regs, 5)))
+        print('')
         defs = pad(show_env(self.env), 20)
         insns = map(self.show_cell, range(100))
-        print '\n'.join(format_columns(defs + insns, 6))
+        print('\n'.join(format_columns(defs + list(insns), 6)))
 
     def show_reg(self, i):
         r = '  ' if i == 0 else 'r%d' % i

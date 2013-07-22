@@ -13,8 +13,8 @@ def run(filename, inputs):
         sys.stdin.read(1)
         try:
             vm.step()
-        except hal_vm.Halt, e:
-            print e
+        except hal_vm.Halt as e:
+            print(e)
             break
 
 if __name__ == '__main__':
