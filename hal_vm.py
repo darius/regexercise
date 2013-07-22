@@ -10,7 +10,7 @@ import assembler
 import re
 
 ## v = load('catfind.s', '')
-## v.run(0)
+## v.show()
 #.               0   r2                r4                r6                r8             
 #. r1                r3                r5                r7                r9             
 #. 
@@ -134,11 +134,12 @@ class VM(object):
         if int(r) != 0:
             self.R[int(r)] = value
 
-    def run(self, nsteps):
-        for _ in range(nsteps):
-            self.show()
-            self.step()
-        self.show()
+    def run(self):
+        while True:
+            try:
+                self.step()
+            except Halt as e:
+                return e.args[0]
 
     def step(self):
         insn = self.fetch(self.pc)
@@ -170,12 +171,12 @@ class VM(object):
         elif op == 'getch':
             ch = next(self.input_chars, None)
             if ch is None:
-                raise Halt('Out of input')
+                raise Halt(False, 'Out of input')
             self.set(r1, ' '*8 + ch)
         elif op == 'noop ':
             pass
         elif op == 'found':
-            raise Halt('Found')
+            raise Halt(True, 'Found')
         else:
             assert False
 

@@ -83,11 +83,12 @@ letter of this requirement more painful than it's worth; so it's
 enough if there's an obvious translation into an allocation-free loop
 in a lower-level language.)
 
-**Machine code for literal patterns**: Take literal patterns, as in
-the first problem, but before the start of matching compile them into
-a machine-code program that'll do the matching. I'll define a simple
-machine language for this, since the IBM 7094 that Thompson used was
-kind of tricky and obscure. (To be written.)
+**Machine code for literal patterns**: In
+[literals_hal.py](literals_hal.py). Take literal patterns, as in the
+first problem, but before the start of matching compile them into a
+machine-code program that'll do the matching. I've defined a simple
+target machine for this, the HAL 100, since the IBM 7094 that Thompson
+used was kind of tricky and obscure. (To be documented.)
 
 **Machine code**: As above, but for regular expressions. You might
 jump straight to this problem if you're confident and impatient.

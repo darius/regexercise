@@ -3,10 +3,12 @@ Tests for the problems.
 """
 
 from regex_parse import make_parser
+import hal_vm
 
 def main(argv):
     problems = (argv[1:]
-                or 'literals finite plus star plus_compiled star_compiled'.split())
+                or ('literals finite plus star plus_compiled star_compiled '
+                    'literals_hal').split())
     for problem in problems:
         test_problem(problem)
     return 0
@@ -52,6 +54,18 @@ def check_literals(module):
     check_search(module.search, [''], 'wheee', 'wheee')
     check1_base(LiteralsRegexMaker(module.search))
     return "Literal patterns: all tests passed."
+
+def check_literals_hal(module):
+    # TODO other check_literals tests -- move 'em into regex tests
+    check1_base(LiteralsRegexMaker(HalSearch(module.compile_pattern)))
+    return "Literal patterns for HAL: all tests passed."
+
+def HalSearch(compiler):
+    def search(regex, chars):
+        program = compiler(regex)
+        return hal_vm.load_program(program, chars).run()
+        # XXX make stream track getch
+    return search
 
 class LiteralsRegexMaker:
     def __init__(self, search):
