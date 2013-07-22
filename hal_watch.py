@@ -2,11 +2,15 @@
 See step-by-step running of the vm. Hit enter at each step.
 """
 
+import sys
+
 import ansi
 import hal_vm
 
-def run(filename, inputs):
-    vm = hal_vm.load(filename, inputs)
+def main(filename, inputs):
+    run(hal_vm.load(filename, inputs))
+
+def run(vm):
     while True:
         sys.stdout.write(ansi.clear_screen)
         vm.show()
@@ -18,5 +22,4 @@ def run(filename, inputs):
             break
 
 if __name__ == '__main__':
-    import sys
-    run(sys.argv[1], sys.argv[2])
+    main(sys.argv[1], sys.argv[2])
