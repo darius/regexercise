@@ -5,7 +5,7 @@ Tests for the problems.
 from regex_parse import make_parser
 import hal_vm
 
-solutions = dict(literals='https://gist.github.com/darius/6066998')
+solutions = set('literals'.split())
 
 def main(argv):
     problems = (argv[1:]
@@ -25,7 +25,8 @@ def test_problem(name):
         print("  Nothing to test yet.")
     else:
         if name in solutions:
-            print("  Passed! See my solution at " + solutions[name])
+            url = "https://github.com/darius/regexercise_solutions/blob/master/%s.py" % name
+            print("  Passed! See my solution at " + url)
         else:
             print("  Passed.")
 
