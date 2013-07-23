@@ -5,6 +5,8 @@ Tests for the problems.
 from regex_parse import make_parser
 import hal_vm
 
+solutions = dict(literals='https://gist.github.com/darius/6066998')
+
 def main(argv):
     problems = (argv[1:]
                 or ('literals finite plus star plus_compiled star_compiled '
@@ -22,7 +24,10 @@ def test_problem(name):
     except NotImplementedError:
         print("  Nothing to test yet.")
     else:
-        print("  Passed.")
+        if name in solutions:
+            print("  Passed! See my solution at " + solutions[name])
+        else:
+            print("  Passed.")
 
 def check_search(search, pattern, string, remainder):
     correct_result = remainder is not None
