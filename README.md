@@ -1,7 +1,7 @@
 regexercise
 ===========
 
-### Exercises in implementing regular-expression search.
+### Exercises in implementing regular-expression search
 
 I'm assuming you know what a regular expression is and you're a fairly
 experienced programmer. I don't know if these exercises are either fun or
