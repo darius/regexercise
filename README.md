@@ -3,10 +3,19 @@ regexercise
 
 ### Exercises in implementing regular-expression search
 
-I'm assuming you know what a regular expression is and you're a fairly
-experienced programmer. I don't know if these exercises are either fun or
-effective -- please comment or fork here or email withal@gmail.com to help me
-improve them.
+Let's say you know what a [regular
+expression](http://en.wikipedia.org/wiki/Regular_expression) is and
+you're a fairly experienced programmer; and you'd like to reach a
+deeper understanding (or just have some fun) by writing a matcher for
+them. These problems gradually work up to an implementation of
+Thompson's algorithm, without telling you how to do it. Each has a
+solution in a page or less of Python, using no especially advanced
+Python features.
+
+I'm confident my solutions are worth reading; on the other hand, I
+have no idea whether this sequence of problems offered without telling
+you the algorithm makes an effective way to learn; if you tackle this,
+please tell me how it goes. (Comment here or email withal@gmail.com.)
 
 To start: `pip install peglet`, read the first problem below, edit
 [literals.py](literals.py), then run `python tests.py` until it likes
