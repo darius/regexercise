@@ -10,7 +10,8 @@ improve them.
 
 To start: `pip install peglet`, read the first problem below, edit
 [literals.py](literals.py), then run `python tests.py` until it likes
-your solution.
+your solution. The code is known to work in Python 2.7 and Python
+3.2; I expect it to work in 2.6.
 
 ## The problems
 
