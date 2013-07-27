@@ -8,7 +8,7 @@ def search(re, chars):
     chars up to the end of the match."""
     raise NotImplementedError
 
-# Regular expression constructors; the re above is built by these.
+# Regular-expression constructors; the re above is built by these.
 # Feel free to change these definitions if it helps.
 def literal(char):    return ('literal', char, None)
 def chain(re1, re2):  return ('chain', re1, re2)
