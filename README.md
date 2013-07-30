@@ -15,7 +15,9 @@ Python features.
 I'm confident my solutions are worth reading; on the other hand, I
 have no idea whether this sequence of problems offered without telling
 you the algorithm makes an effective way to learn; if you tackle this,
-please tell me how it goes. (Comment here or email withal@gmail.com.)
+please tell me how it goes. ([Comment
+here](https://github.com/darius/regexercise/issues) or email
+withal@gmail.com.)
 
 To start: `pip install peglet`, read the first problem below, edit
 [literals.py](literals.py), then run `python tests.py` until it likes
