@@ -102,6 +102,9 @@ def check_finite(module):
     check(module, r'(0|1)'*20,
           'hello 0110001100011000110 how are you?',
           None)
+    check(module, r'(aa|a)'*2,
+          'aaa b',
+          'a b')
     check(module, r'(aa|a)'*40,
           'a aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa b',
           'aaaaa b')
@@ -112,6 +115,7 @@ def check_finite(module):
 
 def check_plus(module):
     check_finite(module)
+    check(module, r'A+', 'A', '')
     check(module, r'A+', 'Rating AAA+, would do again.', 'AA+, would do again.')
     check(module, r'a[bc]+d', 'my abdomen', 'omen')
     check(module, r'a[bc]+d', 'abcbdcb', 'cb')
@@ -125,6 +129,8 @@ def check_plus_compiled(module):
 def check_star(module):
     check_plus(module)
     check(module, r'a*', '', '')
+    check(module, r'ba*', '', None)
+    check(module, r'ba*', 'abc', 'c')
     check(module, r'ab*c', 'an abba abcd', 'd')
     check(module, r'ab*c', 'an abba abd', None)
     check(module, r'yo(ab|c*a)*ba', 'a yoaabcaccaabbaba', 'ba')
