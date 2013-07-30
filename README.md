@@ -76,10 +76,10 @@ than the regular expression -- consider
     >>> ten_bits = sequence(10 * [bit])
 
 `ten_bits`, a regex with 20 literals, would expand out to a list of
-1024 strings; make it 30 bits and you'd get over a billion. (Also,
-we're soon going to add in a repetition operator that'd make the set
-of matching strings infinite.) So now you want to work with a more
-tailored representation.
+1024 strings; and growing from 10 to 30 would expand the strings to
+over a billion. (Also, we're soon going to add in a repetition
+operator that'd make the set of matching strings infinite.) So now you
+want to work with a more tailored representation.
 
 Put your code in [finite.py](finite.py) so [tests.py](tests.py)
 knows where to find it.
