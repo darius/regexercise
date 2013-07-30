@@ -4,8 +4,8 @@ regexercise
 ### Exercises in implementing regular-expression search
 
 Let's say you know what a [regular
-expression](http://en.wikipedia.org/wiki/Regular_expression) is and
-you're a fairly experienced programmer; and you'd like to reach a
+expression](http://en.wikipedia.org/wiki/Regular_expression) is,
+you're a fairly experienced programmer, and you'd like to reach a
 deeper understanding (or just have some fun) by writing a matcher for
 them. These problems gradually work up to an implementation of
 Thompson's algorithm, without telling you how to do it. Each has a
