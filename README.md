@@ -66,18 +66,20 @@ So you could encode the same pattern as before as
     >>> def sequence(regexes): return reduce(chain, regexes)
     >>> rat_or_cat = either(sequence(map(literal, 'rat')), sequence(map(literal, 'cat')))
 
-and then `search2(rat_or_cat, stream)` should produce the same
-result. Of course one way to solve this is, just expand the pattern
-into a list of strings and call `search1`. But this list could get
-exponentially bigger than the regular expression -- consider
+and then, with your new search function, `search(rat_or_cat, stream)`
+should produce the same result. Of course one way to solve this is,
+just expand the pattern into a list of strings and leave `search`
+unchanged. But this list of strings could get exponentially bigger
+than the regular expression -- consider
 
     >>> bit = either(literal('0'), literal('1'))
     >>> ten_bits = sequence(10 * [bit])
 
-`ten_bits`, a regex with 20 literals, would expand out to a list of 1024
-strings. (Also, we're soon going to add in a repetition operator
-that'd make the set of matching strings infinite.) So now you want to
-work with a more tailored representation.
+`ten_bits`, a regex with 20 literals, would expand out to a list of
+1024 strings; make it 30 bits and you'd get over a billion. (Also,
+we're soon going to add in a repetition operator that'd make the set
+of matching strings infinite.) So now you want to work with a more
+tailored representation.
 
 Put your code in [finite.py](finite.py) so [tests.py](tests.py)
 knows where to find it.
