@@ -5,7 +5,7 @@ Tests for the problems.
 from regex_parse import make_parser
 import hal_vm
 
-solutions = set('literals finite plus star literals_hal'.split())
+solutions = set('literals finite plus star star_compiled literals_hal'.split())
 
 def main(argv):
     problems = (argv[1:]
