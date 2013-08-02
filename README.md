@@ -120,9 +120,9 @@ both of its arguments match.
 ## General hints
 
 For all these problems you can keep a set of states of some kind; in
-the main loop you ask if any of the states is the matched state, and
-if not, get the next character from the stream and update the
-state-set according to it. For the first problem [here's
+the main loop you ask if any of the states means a match, and if not,
+get the next character from the stream and update the state-set
+according to it. For the first problem [here's
 pseudocode](http://stackoverflow.com/a/846728/27024) (in the first
 part of the answer; it assumes there's just one pattern string, but
 generalizes easily).
