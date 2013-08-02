@@ -5,12 +5,12 @@ Tests for the problems.
 from regex_parse import make_parser
 import hal_vm
 
-solutions = set('literals finite plus star star_compiled literals_hal'.split())
+all_problems = ('literals finite plus star plus_compiled star_compiled '
+                'literals_hal').split()
+solutions = set(all_problems)
 
 def main(argv):
-    problems = (argv[1:]
-                or ('literals finite plus star plus_compiled star_compiled '
-                    'literals_hal').split())
+    problems = argv[1:] or all_problems
     for problem in problems:
         test_problem(problem)
     return 0
