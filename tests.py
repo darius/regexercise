@@ -97,6 +97,8 @@ def check1_base(module):
     check(module, r'rat|cat', 'a cat is fat', ' is fat')
     check(module, r'XXX', 'XX', None)
     check(module, r'XXXY', 'r u XXXish or XXXY?', '?')
+    check(module, r'bababy', 'aabababababyish', 'ish')
+    check(module, r'bababy', 'aabababababish', None)
 
 def check_finite(module):
     check1_base(module)
