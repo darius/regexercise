@@ -30,16 +30,19 @@ def test_problem(name):
         else:
             print("  Passed.")
 
-def check_search(search, pattern, string, remainder):
+def check_search(search, pattern_string, pattern, string, remainder):
     correct_result = remainder is not None
     stream = iter(string)
     result = search(pattern, stream)
     unconsumed = ''.join(stream)
-    pairs = (("Pattern: ", pattern), ("Input:", string))
+    pairs = ()
+    if pattern_string is not None:
+        pairs += (("Regex:", pattern_string),)
+    pairs += (("Pattern: ", pattern), ("Input:", string))
     if result is not correct_result:
         pairs += (("Result should be:", correct_result),
                   ("But result is:   ", result))
-    if remainder != unconsumed:
+    if unconsumed != (remainder or ''):
         pairs += (("Remainder should be:", remainder),
                   ("But remainder is:   ", unconsumed))
     test_case = ''.join('\n %s %r' % pair for pair in pairs)
@@ -52,12 +55,13 @@ def check_search(search, pattern, string, remainder):
 
 def check(module, regex_string, string, remainder):
     parse = make_parser(module)
-    check_search(module.search, parse(regex_string), string, remainder)
+    check_search(module.search, regex_string, parse(regex_string),
+                 string, remainder)
 
 def check_literals(module):
-    check_search(module.search, [], '', None)
-    check_search(module.search, [], 'wheee', None)
-    check_search(module.search, [''], 'wheee', 'wheee')
+    check_search(module.search, None, [], '', None)
+    check_search(module.search, None, [], 'wheee', None)
+    check_search(module.search, None, [''], 'wheee', 'wheee')
     check1_base(LiteralsRegexMaker(module.search))
     return "Literal patterns: all tests passed."
 
