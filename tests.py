@@ -2,6 +2,9 @@
 Tests for the problems.
 """
 
+import sys
+import traceback
+
 from regex_parse import make_parser
 import hal_vm
 
@@ -30,22 +33,25 @@ def test_problem(name):
         else:
             print("  Passed.")
 
+def check(module, regex_string, string, remainder):
+    parse = make_parser(module)
+    check_search(module.search, regex_string, parse(regex_string),
+                 string, remainder)
+
 def check_search(search, pattern_string, pattern, string, remainder):
     correct_result = remainder is not None
     stream = iter(string)
-    result = search(pattern, stream)
+    try:
+        result = search(pattern, stream)
+    except NotImplementedError:
+        raise
+    except:
+        print_bounded_traceback()
+        print show_test_case(pattern_string, pattern, string, remainder, False)
+        sys.exit(1)
     unconsumed = ''.join(stream)
-    pairs = ()
-    if pattern_string is not None:
-        pairs += (("Regex:", pattern_string),)
-    pairs += (("Pattern: ", pattern), ("Input:", string))
-    if result is not correct_result:
-        pairs += (("Result should be:", correct_result),
-                  ("But result is:   ", result))
-    if unconsumed != (remainder or ''):
-        pairs += (("Remainder should be:", remainder),
-                  ("But remainder is:   ", unconsumed))
-    test_case = ''.join('\n %s %r' % pair for pair in pairs)
+    test_case = show_test_case(pattern_string, pattern, string, remainder,
+                               True, result, unconsumed)
     if remainder is None:
         assert result is False, "Wrong result." + test_case
         assert not unconsumed, "The stream should be exhausted." + test_case
@@ -53,10 +59,30 @@ def check_search(search, pattern_string, pattern, string, remainder):
         assert result is True, "Wrong result." + test_case
         assert unconsumed == remainder, "Too much or too litle of the stream was consumed." + test_case
 
-def check(module, regex_string, string, remainder):
-    parse = make_parser(module)
-    check_search(module.search, regex_string, parse(regex_string),
-                 string, remainder)
+def show_test_case(pattern_string, pattern, string, remainder,
+                   completed, result=None, unconsumed=None):
+    correct_result = remainder is not None
+    pairs = ()
+    if pattern_string is not None:
+        pairs += (("Regex:", pattern_string),)
+    pairs += (("Pattern: ", pattern), ("Input:", string))
+    if not completed:
+        pairs += (("Result should be:", correct_result),)
+    elif result is not correct_result:
+        pairs += (("Result should be:", correct_result),
+                  ("But result is:   ", result))
+    if not completed:
+        pairs += (("Remainder should be:", remainder),)
+    elif unconsumed != (remainder or ''):
+        pairs += (("Remainder should be:", remainder),
+                  ("But remainder is:   ", unconsumed))
+    return ''.join('\n %s %r' % pair for pair in pairs)
+
+def print_bounded_traceback():
+    lines = traceback.format_exc().splitlines()
+    if 30 < len(lines):
+        lines = lines[:15] + ['  [...]'] + lines[-15:]
+    print '\n'.join(lines)
 
 def check_literals(module):
     check_search(module.search, None, [], '', None)
@@ -141,6 +167,9 @@ def check_star(module):
     check(module, r'ab*c', 'an abba abcd', 'd')
     check(module, r'ab*c', 'an abba abd', None)
     check(module, r'yo(ab|c*a)*ba', 'a yoaabcaccaabbaba', 'ba')
+# These tests go beyond the official interface, but can help:
+#    check(module, r'()*', '', '')
+#    check(module, r'(()())*', '', '')
     check(module, r'a(b*)*d', 'an ad attacks', ' attacks')
     check(module, r'a(b*)*d', 'an abdomen', 'omen')
     return "Star: all tests passed."
