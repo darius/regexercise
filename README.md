@@ -26,16 +26,26 @@ your solution. The code is known to work in Python 2.7 and Python
 
 ## The problems
 
-**Literal patterns**: Given a list of strings, and a stream of
-characters, read the stream and report as soon as one of the strings
-occurs in it. (You don't have to report which one.) For example, in
-Python we might ask
+**Literal patterns**: Given a list of strings and a stream of
+characters, report whether the stream starts with one of the
+strings. (You don't have to say which one.) For example, in Python we
+might ask
 
-    >>> stream = iter('a cat is fat')
-    >>> search(['rat', 'cat'], stream)  # Is 'rat' or 'cat' in the stream?
+    >>> stream = iter('cats are fat')
+    >>> search(['rat', 'cat'], stream)  # Does 'rat' or 'cat' start the stream?
     True
     >>> ''.join(stream)  # The rest wasn't consumed, see:
-    ' is fat'
+    's are fat'
+
+The last line shows that we want the match reported as soon as it's
+complete, without reading the rest of the stream; so we couldn't 
+implement `search` as
+
+    def search(strings, chars):
+        chars = ''.join(chars)
+        return any(chars.startswith(string) for string in strings)
+
+because that would eat all the input before checking for any match.
 
 Test your solution by defining it in a module [literals.py](literals.py). Then
 

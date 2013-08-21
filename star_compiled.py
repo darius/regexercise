@@ -7,9 +7,9 @@ into a representation that will make matching more efficient.
 """
 
 def search(re, chars):
-    """Given a regular expression and an iterator of chars, return True
-    if re matches some substring of ''.join(chars); but only consume
-    chars up to the end of the match."""
+    """Given a regular expression and an iterator of chars, return True if
+    re matches some prefix of ''.join(chars); but only consume chars
+    up to the end of the match."""
     raise NotImplementedError
 
 # Regular-expression constructors; the re above is built by these.

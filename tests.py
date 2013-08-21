@@ -114,45 +114,48 @@ class LiteralsRegexMaker:
 def check1_base(module):
     check(module, r'X', 'wheee', None)
     check(module, r'X', 'X', '')
-    check(module, r'X', 'wheXXXee', 'XXee')
-    check(module, r'X', 'yX', '')
-    check(module, r'X|X', 'yX', '')
-    check(module, r'X|YY', 'YX', '')
-    check(module, r'hallo|a', 'hallo', 'llo')
-    check(module, r'ab', 'aab', '')
-    check(module, r'rat|cat', 'a cat is fat', ' is fat')
+    check(module, r'X', 'XXXee', 'XXee')
+    check(module, r'X', 'yX', None)
+    check(module, r'X|X', 'yX', None)
+    check(module, r'X|YY', 'YX', None)
+    check(module, r'X|X', 'Xy', 'y')
+    check(module, r'X|YY', 'XYY', 'YY')
+    check(module, r'allo|a', 'alloha', 'lloha')
+    check(module, r'ab', 'aab', None)
+    check(module, r'ab', 'aba', 'a')
+    check(module, r'rat|cat', 'cats are fat', 's are fat')
     check(module, r'XXX', 'XX', None)
-    check(module, r'XXXY', 'r u XXXish or XXXY?', '?')
-    check(module, r'bababy', 'aababababyish', 'ish')
-    check(module, r'bababy', 'aabababababyish', 'ish')
-    check(module, r'bababy', 'aabababababish', None)
+    check(module, r'XXXY', 'XXXish?', None)
+    check(module, r'XXXY', 'XXXY?', '?')
+    check(module, r'bababy', 'bababyish', 'ish')
+    check(module, r'bababy', 'babababyish', None)
 
 def check_finite(module):
     check1_base(module)
     check(module, r'(0|1)'*20,
-          'hello 01100011000110001100 how are you?',
+          '01100011000110001100 how are you?',
           ' how are you?')
     check(module, r'(0|1)'*20,
-          'hello 0110001100011000110 how are you?',
+          '0110001100011000110 how are you?',
           None)
     check(module, r'(aa|a)'*2,
           'aaa b',
           'a b')
     check(module, r'(aa|a)'*40,
-          'a aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa b',
+          'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa b',
           'aaaaa b')
     check(module, r'(aa|a)'*40,
-          'a aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa b',
+          'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa b',
           None)
     return "Abstract data: all tests passed."
 
 def check_plus(module):
     check_finite(module)
     check(module, r'A+', 'A', '')
-    check(module, r'A+', 'Rating AAA+, would do again.', 'AA+, would do again.')
-    check(module, r'a[bc]+d', 'my abdomen', 'omen')
+    check(module, r'A+', 'AAA+, would do again.', 'AA+, would do again.')
+    check(module, r'a[bc]+d', 'abdomen', 'omen')
     check(module, r'a[bc]+d', 'abcbdcb', 'cb')
-    check(module, r'a[bc]+d', 'my addomen', None)
+    check(module, r'a[bc]+d', 'addomen', None)
     check(module, r'(cat|dog)+like', 'dogcatcatdogcatdogdogcatdogcatcatdogcatdogdogcatlikely', 'ly')
     return "Plus: all tests passed."
 
@@ -163,15 +166,15 @@ def check_star(module):
     check_plus(module)
     check(module, r'a*', '', '')
     check(module, r'ba*', '', None)
-    check(module, r'ba*', 'abc', 'c')
-    check(module, r'ab*c', 'an abba abcd', 'd')
-    check(module, r'ab*c', 'an abba abd', None)
-    check(module, r'yo(ab|c*a)*ba', 'a yoaabcaccaabbaba', 'ba')
+    check(module, r'ba*', 'bc', 'c')
+    check(module, r'ab*c', 'abcd', 'd')
+    check(module, r'ab*c', 'abd', None)
+    check(module, r'yo(ab|c*a)*ba', 'yoaabcaccaabbaba', 'ba')
 # These tests go beyond the official interface, but can help:
 #    check(module, r'()*', '', '')
 #    check(module, r'(()())*', '', '')
-    check(module, r'a(b*)*d', 'an ad attacks', ' attacks')
-    check(module, r'a(b*)*d', 'an abdomen', 'omen')
+    check(module, r'a(b*)*d', 'ad attacks', ' attacks')
+    check(module, r'a(b*)*d', 'abdomen', 'omen')
     return "Star: all tests passed."
 
 def check_star_compiled(module):

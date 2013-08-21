@@ -14,14 +14,15 @@ def compile_just_A():
     do for compile_pattern(['A'])."""
     program = """
 ;; Execution starts here at address 0.
-fail    getch   r1
+        getch   r1
         ifne    r1,'A',fail
         found
+fail    notfound
 """
     return program.splitlines()
 
 if __name__ == '__main__':
     import hal_vm, hal_watch
     program = compile_just_A()
-    sample_input = "You get an A and a gold star."
+    sample_input = "An A and a gold star just for you!"
     hal_watch.run(hal_vm.load_program(program, sample_input))
