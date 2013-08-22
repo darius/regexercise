@@ -99,7 +99,7 @@ def check_literals_hal(module):
 def HalSearch(compiler):
     def search(regex, chars):
         program = compiler(regex)
-        return hal_vm.load_program(program, chars).run()
+        return not not hal_vm.load_program(program, chars).run()
         # XXX make stream track getch
     return search
 

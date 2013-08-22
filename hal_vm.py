@@ -171,14 +171,15 @@ class VM(object):
         elif op == 'getch':
             ch = next(self.input_chars, None)
             if ch is None:
-                raise Halt(False, 'Out of input')
+                raise Halt(0, 'Out of input')
             self.set(r1, ' '*8 + ch)
-        elif op == 'noop ':
+        elif op == 'noop ' or op == '     ':
             pass
-        elif op == 'found':
-            raise Halt(True, 'Found')
+        elif op == 'halt ':
+            value = ea()
+            raise Halt(value, 'Found' if value else 'Not found')
         else:
-            assert False
+            assert False, "Unknown instruction: %r" % op
 
 class Halt(Exception): pass
 
