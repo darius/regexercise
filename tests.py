@@ -112,6 +112,7 @@ class LiteralsRegexMaker:
     def either(self, r, s):  return r + s
 
 def check1_base(module):
+    check(module, r'X', '', None)
     check(module, r'X', 'wheee', None)
     check(module, r'X', 'X', '')
     check(module, r'X', 'XXXee', 'XXee')
