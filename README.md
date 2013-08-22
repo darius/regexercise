@@ -45,7 +45,11 @@ implement `search` as
         chars = ''.join(chars)
         return any(chars.startswith(string) for string in strings)
 
-because that would eat all the input before checking for any match.
+because that would eat all the input before checking for any
+match. (If the input *doesn't* match any of the strings, you can
+report that as soon as it's evident, but you don't have to; the tests
+only check that you return False then, not how much of the stream you
+consume.)
 
 Test your solution by defining it in a module [literals.py](literals.py). Then
 
