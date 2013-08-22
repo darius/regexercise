@@ -138,8 +138,9 @@ the main loop you ask if any of the states means a match, and if not,
 get the next character from the stream and update the state-set
 according to it. For the first problem [here's
 pseudocode](http://stackoverflow.com/a/846728/27024) (in the first
-part of the answer; it assumes there's just one pattern string, but
-generalizes easily).
+part of the answer; it assumes there's just one pattern string, and
+searches for it anywhere in the input, not just at the beginning,
+but it gives the idea).
 
 What kind of states will work for the subsequent problems?
 Essentially, regular expressions again: if a state represents a
