@@ -13,5 +13,4 @@ def search(re, chars):
 def literal(char):    return ('literal', char, None)
 def chain(re1, re2):  return ('chain', re1, re2)
 def either(re1, re2): return ('either', re1, re2)
-def plus(re):         return ('plus', re, None)
 def star(re):         return ('star', re, None)
