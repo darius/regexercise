@@ -47,7 +47,7 @@ def check_search(search, pattern_string, pattern, string, remainder):
         raise
     except:
         print_bounded_traceback()
-        print show_test_case(pattern_string, pattern, string, remainder, False)
+        print(show_test_case(pattern_string, pattern, string, remainder, False))
         sys.exit(1)
     unconsumed = ''.join(stream)
     test_case = show_test_case(pattern_string, pattern, string, remainder,
@@ -82,7 +82,7 @@ def print_bounded_traceback():
     lines = traceback.format_exc().splitlines()
     if 30 < len(lines):
         lines = lines[:15] + ['  [...]'] + lines[-15:]
-    print '\n'.join(lines)
+    print('\n'.join(lines))
 
 def check_literals(module):
     check_search(module.search, None, [], '', None)
