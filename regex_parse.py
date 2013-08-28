@@ -11,14 +11,26 @@ def make_parser(maker):
     def dot():         return maker.anyone
     def chain(r, s):   return maker.chain(r, s)
     def either(r, s):  return maker.either(r, s)
-    def star(r):       return maker.star(r)
-    def plus(r):       return maker.plus(r)
 
     def optional(r):   return either(r, empty())
+
+    if not hasattr(maker, 'star') and not hasattr(maker, 'plus'):
+        def star(r): raise Exception("No star() constructor supplied")
+        def plus(r): raise Exception("No plus() constructor supplied")
+    else:
+        if hasattr(maker, 'star'):
+            star = maker.star
+        else:
+            def star(r): return optional(plus(r))
+        if hasattr(maker, 'plus'):
+            plus = maker.plus
+        else:
+            def plus(r): return chain(r, star(r))
+
     if hasattr(maker, 'oneof'):
         oneof = maker.oneof
     else:
-        def oneof(chars):  return reduce(either, map(literal, chars))
+        def oneof(chars): return reduce(either, map(literal, chars))
 
     parser = Parser(r"""
 regex   = exp $
