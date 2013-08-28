@@ -50,10 +50,10 @@ factor  = primary [*]     star
         | primary
 
 primary = \( exp \)
-        | \[ charset \]   join oneof
-        | [.]             dot
-        | \\(.)           literal
-        | ([^.()*+?|[\]]) literal
+        | \[ charset \]    join oneof
+        | [.]              dot
+        | \\(.)            literal
+        | ([^.()&*+?|[\]]) literal
 
 charset = char charset
         |

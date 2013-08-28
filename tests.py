@@ -9,7 +9,7 @@ from regex_parse import make_parser
 import hal_vm
 
 all_problems = ('literals finite plus star plus_compiled star_compiled '
-                'literals_hal').split()
+                'literals_hal both').split()
 solutions = set(all_problems)
 
 def main(argv):
@@ -161,7 +161,8 @@ def check_plus(module):
     return "Plus: all tests passed."
 
 def check_plus_compiled(module):
-    return check_plus(module)
+    check_plus(module)
+    return "Plus_compiled: all tests passed."
 
 def check_star(module):
     check_plus(module)
@@ -179,7 +180,15 @@ def check_star(module):
     return "Star: all tests passed."
 
 def check_star_compiled(module):
-    return check_star(module)
+    check_star(module)
+    return "Star_compiled: all tests passed."
+
+def check_both(module):
+    check_star(module)
+    check(module, r'a&b', 'a', None)
+    check(module, r'a&a', 'a', '')
+    # XXX lots more tests needed
+    return "Both: all tests passed."
 
 if __name__ == '__main__':
     import sys

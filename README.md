@@ -128,8 +128,8 @@ that Thompson used was kind of tricky and obscure.
 **Machine code**: As above, but for regular expressions. You might
 jump straight to this problem if you're confident and impatient.
 
-**Bonus:** Add a `both(regex1, regex2)` constructor that matches when
-both of its arguments match.
+**Bonus:** In [both.py](both.py) add a `both(regex1, regex2)`
+constructor that matches when both of its arguments match.
 
 ## General hints
 
