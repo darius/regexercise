@@ -11,12 +11,13 @@ def make_parser(maker):
     def dot():         return maker.anyone
     def chain(r, s):   return maker.chain(r, s)
     def either(r, s):  return maker.either(r, s)
+    def both(r, s):    return maker.both(r, s)
 
     def optional(r):   return either(r, empty())
 
     if not hasattr(maker, 'star') and not hasattr(maker, 'plus'):
-        def star(r): raise Exception("No star() constructor supplied")
-        def plus(r): raise Exception("No plus() constructor supplied")
+        def star(r): raise Exception("No star() or star() constructor supplied")
+        def plus(r): raise Exception("No plus() or star() constructor supplied")
     else:
         if hasattr(maker, 'star'):
             star = maker.star
@@ -36,6 +37,7 @@ def make_parser(maker):
 regex   = exp $
 
 exp     = term [|] exp    either
+        | term & exp      both
         | term
         |                 empty
 
