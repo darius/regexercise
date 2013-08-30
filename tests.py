@@ -187,6 +187,8 @@ def check_both(module):
     check_star(module)
     check(module, r'a&b', 'a', None)
     check(module, r'a&a', 'a', '')
+    check(module, r'a*(a*&[ab][ab][ab])b', 'aaaabb', 'b')
+    check(module, r'a*(a*&[ab][ab][ab])b', 'aabbbb', None)
     # XXX lots more tests needed
     return "Both: all tests passed."
 
