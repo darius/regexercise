@@ -189,6 +189,10 @@ def check_both(module):
     check(module, r'a&a', 'a', '')
     check(module, r'a*(a*&[ab][ab][ab])b', 'aaaabb', 'b')
     check(module, r'a*(a*&[ab][ab][ab])b', 'aabbbb', None)
+    check(module, r'(c[aeiou])*&[caeiou][caeiou][caeiou][caeiou]',
+          'cacophony', 'phony')
+    check(module, r'(c[aeiou])*&[caeiou][caeiou][caeiou][caeiou]',
+          'caccphony', None)
     # XXX lots more tests needed
     return "Both: all tests passed."
 
