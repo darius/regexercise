@@ -49,6 +49,7 @@ def load_program(program_lines, inputs):
     return VM(words, inputs, env)
 
 def assemble1(tokens, env):
+    "Assemble a single line of source code."
     mnemonic, rest = tokens[0].lower(), ' '.join(tokens[1:])
     fields = [field.strip() or '0' for field in rest.split(',')]
     args = [eval(operand, {}, env) for operand in fields]
