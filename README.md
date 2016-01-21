@@ -7,10 +7,9 @@ Let's say you know what a [regular
 expression](http://en.wikipedia.org/wiki/Regular_expression) is,
 you're a fairly experienced programmer, and you'd like to reach a
 deeper understanding (or just have some fun) by writing a matcher for
-them. These problems gradually work up to an implementation of
-Thompson's algorithm, without telling you how to do it. Each has a
-solution in a page or less of Python, using no especially advanced
-Python features.
+them. These problems gradually work up to a compiled matcher, without
+telling you how to do it. Each has a solution in a page or less of
+Python, using no especially advanced Python features.
 
 I'm confident my solutions are worth reading; on the other hand, I
 have no idea whether this sequence of problems offered without telling
@@ -147,10 +146,10 @@ Essentially, regular expressions again: if a state represents a
 regular expression r, and you get input character c, then the
 [Brzozowski
 derivative](http://blog.sigfpe.com/2005/05/derivatives-of-regular-expressions.html)
-dr/dc is the next state. Thompson represents dr/dc as a set of 0 or
-more possible next states. If r is `ax|ay` and c is `a`, then you
-could get either one next state, `x|y`, or two next states, `x` and
-`y`, depending on how you write your code.
+dr/dc is the next state. Thompson represents dr/dc as a set of
+possible next states, zero or more of them. If r is `ax|ay` and c is
+`a`, then you could get either one next state, `x|y`, or two next
+states, `x` and `y`, depending on how you write your code.
 
 Here's the original paper ["Regular Expression Search
 Algorithm"](http://www.fing.edu.uy/inco/cursos/intropln/material/p419-thompson.pdf).
